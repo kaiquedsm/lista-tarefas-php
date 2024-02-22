@@ -1,0 +1,102 @@
+:root {
+    --height-header: 15vh;
+    --height-footer: 10vh;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    position: relative;
+}
+
+header {
+    background-color: #0d7a3f;
+    height: var(--height-header);
+    width: 100%;
+}
+
+/* ====================== CONTAINER ========================= */
+
+.container {
+    display: flex;
+    height: calc(100vh - var(--height-header) - var(--height-footer));
+    width: 100vw;
+}
+
+/* ======================== ASIDE =========================== */
+
+aside {
+    background-color: #085f31;
+    color: white;
+    height: 100%;
+    padding: 20px;
+}
+
+.aside_title {
+    color: white;
+    padding: 5px;
+}
+
+.item_aside {
+    background-color: #0c4928;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.item {
+    margin-left: 5px;
+    width: 100%;
+}
+
+.new-task {
+    background-color: #30e929;
+    width: 50%;
+    height: 50%;
+}
+
+.new-task-sub {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+}
+
+li {
+    list-style-type: none;
+}
+
+/* .hidden_list_aside {
+    display: none;
+} */
+
+.hidden_list_aside li {
+    margin-left: 10px;
+}
+
+/* ======================= SECTION ========================== */
+
+.section-articles {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: 0 auto;
+}
+
+article {
+    background-color: #085f31;
+    height: 100px;
+    width: 100px;
+    margin: 5px;
+}
+
+/* ======================== FOOTER ========================== */
+
+footer {
+    background-color: #0d7a3f;
+    height: var(--height-footer);
+}

@@ -1,0 +1,2 @@
+- filtrar todas as tarefas a partir de um mês específico, junto com o ano: 
+    Pode ter casos em que eu criei uma tarefa no mês de janeiro de 2024, e ainda está em andamento em fevereiro de 2024, e quando eu selecionar as tarefas do mês de janeiro de 2024 quanto do mês de fevereiro de 2024, mostrará a mesma tarefa, e quando concluir, será colocada no campo tarefas concluídas, e a mesma sumirá do campo tarefa em andamento

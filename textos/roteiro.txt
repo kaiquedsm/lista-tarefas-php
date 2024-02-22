@@ -1,0 +1,17 @@
+A página principal será composta por todas as tarefas a fazer, em andamento e feitas.
+
+Terá cada div uma parte para tarefas a serem feitas, tarefas sendo feitas e tarefas feitas. 
+
+
+
+Na parte do sidebar, terá opções como:
+    - filtrar todas as tarefas a partir de um mês específico, junto com o ano.
+    - botões para:
+        - adicionar uma nova tarefa( referente ao período atual). 
+        - alterar uma tarefa
+        - consultar uma tarefa
+        - excluir uma tarefa
+    
+
+
+ 
