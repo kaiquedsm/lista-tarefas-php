@@ -9,14 +9,45 @@
     box-sizing: border-box;
 }
 
-html {
-    position: relative;
-}
+
+/* ====================== HEADER ========================= */
 
 header {
     background-color: #0d7a3f;
+    display: flex;
+    justify-content: space-between;
     height: var(--height-header);
     width: 100%;
+}
+
+/* ====================== MENSAGENS ========================= */
+
+.bold {
+    font-weight: bold;
+}
+
+.msg-container {
+    padding: 15px;
+}
+
+.msg {
+    width: 60%;
+    margin: 0 auto;
+    padding: 10px;
+    border: solid 1px #000;
+    text-align: center;
+}
+
+.msg.error {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+}
+
+.msg.success {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #badbcc;
 }
 
 /* ====================== CONTAINER ========================= */
@@ -80,6 +111,12 @@ li {
 
 /* ======================= SECTION ========================== */
 
+section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .section-articles {
     display: flex;
     flex-wrap: wrap;
@@ -93,6 +130,10 @@ article {
     width: 100px;
     margin: 5px;
 }
+
+/* ======================= LOGIN / REGISTER ========================== */
+
+
 
 /* ======================== FOOTER ========================== */
 
