@@ -1,5 +1,5 @@
 :root {
-    --height-header: 15vh;
+    --height-header: 10vh;
     --height-footer: 10vh;
 }
 
@@ -9,6 +9,11 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: 'Courier New', Courier, monospace;
+    color: #fff;
+}
+
 
 /* ====================== HEADER ========================= */
 
@@ -16,8 +21,38 @@ header {
     background-color: #0d7a3f;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: var(--height-header);
     width: 100%;
+    padding: 10px 20px;
+}
+
+
+header .logo {
+    height: 100%;
+}
+
+header .logo img {
+    padding: 5px;
+}
+
+header nav {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+nav a:hover {
+    font-size: 1.1rem;
 }
 
 /* ====================== MENSAGENS ========================= */
@@ -64,12 +99,21 @@ aside {
     background-color: #085f31;
     color: white;
     height: 100%;
+    width: 20%;
     padding: 20px;
 }
 
 .aside_title {
     color: white;
     padding: 5px;
+}
+
+aside span, li {
+    cursor: pointer;
+}
+
+aside span:hover, li:hover {
+    text-decoration: underline;
 }
 
 .item_aside {
@@ -101,9 +145,9 @@ li {
     list-style-type: none;
 }
 
-/* .hidden_list_aside {
+.hidden_list_aside {
     display: none;
-} */
+}
 
 .hidden_list_aside li {
     margin-left: 10px;
@@ -113,6 +157,7 @@ li {
 
 section {
     width: 100%;
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
 }
@@ -134,10 +179,60 @@ article {
 /* ======================= LOGIN / REGISTER ========================== */
 
 
+form {
+    width: 30%;
+    max-width: 450px;
+    padding: 20px;
+    margin: auto;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #085f31;
+    border-radius: 20px;
+}
+
+.form-control {
+    color: black;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-control input {
+    font-family: 'Courier New', Courier, monospace;
+    margin: 1% 0;
+    height: 2.2rem;
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.form-control input[type="submit"] {
+    color: #fff;
+    background-color: #0d7a3f;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.form-redirect {
+    color: #000;
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.form-redirect a {
+    color: #0d7a3f;
+    text-decoration: none;
+}
+
 
 /* ======================== FOOTER ========================== */
 
 footer {
     background-color: #0d7a3f;
     height: var(--height-footer);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

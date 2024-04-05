@@ -12,7 +12,7 @@
     $db_name = "projeto_tarefas";
     $db_host = "localhost";
     $db_user = "root";
-    $db_pass = "postdba";
+    $db_pass = "";
     
     $conn = new PDO("mysql:dbname=".$db_name.";host=".$db_host, $db_user, $db_pass);
     

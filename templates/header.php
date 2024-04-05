@@ -34,14 +34,18 @@
     
     <header>
         <div class="logo">
-            <span>LOGO</span>
+            <a href="index.php">
+                <img src="assets/img/book.png" alt="" height="100%">
+            </a>
         </div>
         <nav>
+            <a href="">Menu</a>
+            <a href="">Sobre</a>
+            <a href="">Contatos</a>  
             <?php if($userData): ?>
-                <span><?= $userData->getName() ?></span>
+                <?= $userData->getName() ?>
+            <?php else: ?>
+                <a href="login.php">Registrar / Logar</a>
             <?php endif; ?>
-            <span>Menu</span>
-            <span>Sobre</span>
-            <span>Contatos</span>  
         </nav>
     </header>
