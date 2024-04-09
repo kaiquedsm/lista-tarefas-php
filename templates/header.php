@@ -6,12 +6,12 @@
     require_once('dao/UserDAO.php');
     require_once("models/Message.php");
     
-    $task = new TaskDAO($conn);
+    $taskDAO = new TaskDAO($conn, $BASE_URL);
     $userDAO = new UserDAO($conn, $BASE_URL);
     $message = new Message($BASE_URL);
     
     $userData = $userDAO->verifyToken(false);
-    $findTasks = $task->findAll();    
+    $findTasks = $taskDAO->findAll();    
     
     $flashMessage = $message->getMessage();
     
@@ -39,11 +39,12 @@
             </a>
         </div>
         <nav>
-            <a href="">Menu</a>
             <a href="">Sobre</a>
             <a href="">Contatos</a>  
             <?php if($userData): ?>
-                <?= $userData->getName() ?>
+                <a href="<?= $BASE_URL ?>/profile.php">
+                    <?= $userData->getName() ?>                    
+                </a>
             <?php else: ?>
                 <a href="login.php">Registrar / Logar</a>
             <?php endif; ?>

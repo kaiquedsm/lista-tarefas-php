@@ -99,8 +99,8 @@ aside {
     background-color: #085f31;
     color: white;
     height: 100%;
-    width: 20%;
-    padding: 20px;
+    width: 27.5%;
+    padding: 10px;
 }
 
 .aside_title {
@@ -112,22 +112,38 @@ aside span, li {
     cursor: pointer;
 }
 
-aside span:hover, li:hover {
+aside a:hover, span:hover, li:hover {
     text-decoration: underline;
 }
 
 .item_aside {
+    text-align: justify;
     background-color: #0c4928;
     width: 100%;
-    padding: 10px 0;
+    padding: 10px;
 }
 
 .item {
+    color: #fff;
     margin-left: 5px;
     width: 100%;
+    text-decoration: none;
 }
 
-.new-task {
+.button-new-task {
+    font-family: 'Courier New', Courier, monospace;
+    color: #fff;
+    background-color: transparent;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.button-new-task:hover {
+    text-decoration: underline;
+}
+
+/* .new-task {
     background-color: #30e929;
     width: 50%;
     height: 50%;
@@ -139,7 +155,7 @@ aside span:hover, li:hover {
     height: 100%;
     width: 100%;
     padding: 20px;
-}
+} */
 
 li {
     list-style-type: none;
@@ -163,23 +179,36 @@ section {
 }
 
 .section-articles {
+    color: #000;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     width: 80%;
     margin: 0 auto;
 }
 
-article {
-    background-color: #085f31;
-    height: 100px;
-    width: 100px;
-    margin: 5px;
+.section-articles a {
+    color: white;
+    text-decoration: none;
 }
 
-/* ======================= LOGIN / REGISTER ========================== */
+article {
+    background-color: #085f31;
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.task-buttons {
+    display: flex;
+}
 
 
-form {
+/* ======================= FORMS ========================== */
+
+
+.form {
     width: 30%;
     max-width: 450px;
     padding: 20px;
@@ -212,6 +241,12 @@ form {
     font-size: 1.1rem;
     margin-top: 10px;
     cursor: pointer;
+}
+
+.form-control textarea {
+    padding: 5px;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 .form-redirect {

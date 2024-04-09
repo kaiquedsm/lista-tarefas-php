@@ -5,7 +5,7 @@
 ?>
 
     <section>
-        <form action="auth-process.php" method="POST">
+        <form action="auth-process.php" method="POST" class="form">
             <div>
                 <input type="hidden" value="register" name="type" id="register">
                 <div class="form-control">

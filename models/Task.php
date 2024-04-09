@@ -53,9 +53,11 @@
     
     interface TaskDAOInterface {
         
+        
+        public function buildTask($data);
         public function create (Task $task);
-        public function edit (Task $task);
-        public function find (Task $task);
+        public function update (Task $task);
+        public function findById ($id);
         public function findAll();
         public function delete (Task $task);
         

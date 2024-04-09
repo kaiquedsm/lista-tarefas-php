@@ -1,18 +1,36 @@
 <?php 
 
     require_once('models/Task.php');
+    require_once("models/Message.php");
     
     class TaskDAO implements TaskDAOInterface {
         
         private $conn;
+        private $url;
+        private $message;
         
-        public function __construct(PDO $conn) {
+        public function __construct(PDO $conn, $url) {
             $this->conn = $conn;
+            $this->url = $url;
+            $this->message = new Message($url);
+        }
+        
+        public function buildTask($data) {
+            $task = new Task();
+            
+            $task->setId($data['id']);
+            $task->setTitulo($data['titulo']);
+            $task->setDataInicio($data['data_inicio']);
+            $task->setDataTermino($data['data_termino']);
+            $task->setDescricao($data['descricao']);
+            
+            // retorna para quem chamar esse método
+            return $task;
         }
         
         public function create(Task $task) {
             
-            $query = "INSERT INTO projeto_tarefas (titulo, data_inicio, data_termino, descricao) VALUES (:titulo, :data_inicio, :data_termino, :descricao)";
+            $query = "INSERT INTO tarefas (titulo, data_inicio, data_termino, descricao) VALUES (:titulo, :data_inicio, :data_termino, :descricao)";
             
             $stmt = $this->conn->prepare($query);
             
@@ -23,11 +41,13 @@
             
             $stmt->execute();
             
+            $this->message->setMessage("Tarefa adicionada com sucesso", "success", "/index.php");
+            
         }
         
-        public function edit (Task $task) {
+        public function update (Task $task) {
             
-            $query = "UPDATE projeto_tarefas SET (titulo = :titulo, data_inicio = :data_inicio, data_termino = :data_termino, descricao = :descricao) WHERE id = :id";
+            $query = "UPDATE tarefas SET titulo = :titulo, data_inicio = :data_inicio, data_termino = :data_termino, descricao = :descricao WHERE id = :id";
             
             $stmt = $this->conn->prepare($query);
             
@@ -39,17 +59,32 @@
             
             $stmt->execute();
             
+            $this->message->setMessage("Tarefa atualizada com sucesso", "success", "/index.php");
+            
         }
         
-        public function find (Task $task) {
+        public function findById ($id) {
             
-            $query = "SELECT * FROM projeto_tarefas WHERE id = :id";
+            $task = [];
+            
+            $query = "SELECT * FROM tarefas WHERE id = :id";
             
             $stmt = $this->conn->prepare($query);
             
-            $stmt->bindParam(":id", $task->getId());
+            $stmt->bindParam(":id", $id);
             
-            $stmt->execute();            
+            $stmt->execute();
+            
+            if($stmt->rowCount() > 0) {
+                
+                $taskData = $stmt->fetch();
+                
+                $task = $this->buildTask($taskData);
+                
+                return $task;
+                
+            }
+            
             
         }
         
