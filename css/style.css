@@ -201,7 +201,10 @@ article {
 }
 
 .task-buttons {
+    width: 100%;
     display: flex;
+    justify-content: center;
+    margin: 10px 0;
 }
 
 
@@ -247,6 +250,22 @@ article {
     padding: 5px;
     border: 1px solid black;
     border-radius: 5px;
+}
+
+.button-task input[type="submit"], .button-task button {
+    font-size: 15px;
+    display: block;
+    width: 80px;
+    height: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #0d7a3f;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.button-task button a {
+    color: #0d7a3f;
 }
 
 .form-redirect {

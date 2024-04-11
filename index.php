@@ -1,6 +1,12 @@
 <?php 
 
     require_once("templates/header.php");
+    
+    if($userData !== null) {
+        $userTasks = $taskDAO->getTasksByUserId($userData->getId());
+    } else {
+        $userTasks = [];
+    }
 
 ?>
 <div class="container">
@@ -45,33 +51,43 @@
                 </div>
             <?php endif; ?>
             <div class="section-articles">
-                <div class="to-do">
-                    <h3>A fazer</h3>
+                <?php if(!empty($userData) && !empty($userTasks)): ?>
+                    <div class="to-do">
+                        <h3>A fazer</h3>
+                    </div>
+                    <div class="doing">
+                        <h3>Em andamento</h3>
+                    </div>
+                    <div class="done">
+                        <h3>Concluído</h3>
+                    </div>
+                    <?php foreach($userTasks as $task): ?>
+                        <article>
+                                <?= $task->getTitulo() ?>
+                                <p>Início: <?= $task->getDataInicio() ?></p>
+                                <p>Término: <?= $task->getDataTermino() ?></p>
+                                <div class="task-buttons">
+                                    <div class="button-task">
+                                        <button>
+                                            <a href="task.php?id=<?= $task->getId() ?>">Editar</a>
+                                        </button>
+                                    </div>
+                                    <form action="task-process.php" method="POST">
+                                        <input type="hidden" name="type" value="delete">
+                                        <input type="hidden" name="id" value="<?= $task->getId() ?>">
+                                        <div class="button-task">
+                                            <input type="submit" name="" value="Deletar">
+                                        </div>
+                                    </form>
+                                </div>
+                        </article>                 
+                    <?php endforeach; ?>
+                <?php elseif(!empty($userData) && empty($userTasks)): ?>
+                    <h2>Sem tarefas no momento</h2>
+                <?php else: ?>
+                    <h2>Faça o login para exibir as tarefas</h2>
+                    <?php endif; ?>
                 </div>
-                <div class="doing">
-                    <h3>Em andamento</h3>
-                </div>
-                <div class="done">
-                    <h3>Concluído</h3>
-                </div>
-                <?php foreach((array)$findTasks as $task): ?>
-                    <article>
-                        <a href="task.php?id=<?= $task->getId() ?>">
-                            <?= $task->getTitulo() ?>
-                            <p>Início: <?= $task->getDataInicio() ?></p>
-                            <p>Término: <?= $task->getDataTermino() ?></p>
-                            <div class="task-buttons">
-                                <a href="task.php?id=<?= $task->getId() ?>">Editar</a>
-                                <form action="">
-                                    <input type="hidden" name="type" value="delete">
-                                    <input type="submit" name="" value="Deletar">
-                                </form>
-                                
-                            </div>
-                        </a>
-                    </article>                 
-                <?php endforeach; ?>
-            </div>
         </section>
 </div>
 

@@ -32,18 +32,27 @@
                 <input type="submit" name="" value="Adicionar">
             <?php else: ?>
                 <input type="hidden" name="type" id="" value="edit">
-                <input type="hidden" name="id" id="" value="<?= $task['id'] ?>">
-                <label for="titulo">Título</label>
-                <input type="text" name="titulo" id="" value="<?= $task['titulo'] ?>"><br>
-                <label for="data_inicio">Data de início</label>
-                <input type="date" name="data_inicio" id="" value="<?= $task['data_inicio'] ?>"><br>
-                <label for="data_termino">Data de término</label>
-                <input type="date" name="data_termino" id="" value="<?= $task['data_termino'] ?>"><br>
-                <label for="descricao">Descrição</label>
-                <textarea name="descricao" id=""rows="5"><?= $task['descricao'] ?></textarea>
-                <input type="submit" name="" value="Editar">
+                <input type="hidden" name="id" id="" value="<?= $task->getId() ?>">
+                <div class="form-control">
+                    <label for="titulo">Título</label>
+                    <input type="text" name="titulo" id="" value="<?= $task->getTitulo() ?>"><br>
+                </div>
+                <div class="form-control">
+                    <label for="data_inicio">Data de início</label>
+                    <input type="date" name="data_inicio" id="" value="<?= $task->getDataInicio() ?>"><br>
+                </div>
+                <div class="form-control">
+                    <label for="data_termino">Data de término</label>
+                    <input type="date" name="data_termino" id="" value="<?= $task->getDataTermino() ?>"><br>
+                </div>
+                <div class="form-control">
+                    <label for="descricao">Descrição</label>
+                    <textarea name="descricao" id=""rows="5"><?= $task->getDescricao() ?></textarea>
+                </div>
+                <div class="form-control">
+                    <input type="submit" name="" value="Editar">
+                </div>
             <?php endif; ?>
-            
         </form>
     </section>
 </div>

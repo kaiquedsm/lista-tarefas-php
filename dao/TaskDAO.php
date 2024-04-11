@@ -30,7 +30,7 @@
         
         public function create(Task $task) {
             
-            $query = "INSERT INTO tarefas (titulo, data_inicio, data_termino, descricao) VALUES (:titulo, :data_inicio, :data_termino, :descricao)";
+            $query = "INSERT INTO tarefas (titulo, data_inicio, data_termino, descricao, user_id) VALUES (:titulo, :data_inicio, :data_termino, :descricao, :user_id)";
             
             $stmt = $this->conn->prepare($query);
             
@@ -38,6 +38,7 @@
             $stmt->bindParam(":data_inicio", $task->getDataInicio());
             $stmt->bindParam(":data_termino", $task->getDataTermino());
             $stmt->bindParam(":descricao", $task->getDescricao());
+            $stmt->bindParam(":user_id", $task->getId());
             
             $stmt->execute();
             
@@ -60,6 +61,32 @@
             $stmt->execute();
             
             $this->message->setMessage("Tarefa atualizada com sucesso", "success", "/index.php");
+            
+        }
+        
+        public function getTasksByUserId($id) {
+            
+            $tasks = [];
+            
+            $query = "SELECT * FROM tarefas WHERE user_id = :user_id";
+            
+            $stmt = $this->conn->prepare($query);
+            
+            $stmt->bindParam(":user_id", $id);
+            
+            $stmt->execute();
+            
+            if($stmt->rowCount() > 0) {
+                
+                $taskData = $stmt->fetchAll();
+                
+                foreach($taskData as $task) {
+                    $tasks[] = $this->buildTask($task);
+                }
+                
+            }
+            
+            return $tasks;
             
         }
         
@@ -88,15 +115,17 @@
             
         }
         
-        public function delete (Task $task) {
+        public function delete ($id) {
             
-            $query = "DELETE FROM projeto_tarefas WHERE id = :id";
+            $query = "DELETE FROM tarefas WHERE id = :id";
             
             $stmt = $this->conn->prepare($query);
             
-            $stmt->bindParam(":id", $task->getId());
+            $stmt->bindParam(":id", $id);
             
-            $stmt->execute();           
+            $stmt->execute();          
+            
+            $this->message->setMessage("Tarefa excluída com sucesso", "success", "/index.php");
             
         }
         
