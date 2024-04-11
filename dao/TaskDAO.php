@@ -23,6 +23,8 @@
             $task->setDataInicio($data['data_inicio']);
             $task->setDataTermino($data['data_termino']);
             $task->setDescricao($data['descricao']);
+            $task->setUserId($data['user_id']);
+            $task->setStatusId($data['status_id']);
             
             // retorna para quem chamar esse método
             return $task;
@@ -30,7 +32,7 @@
         
         public function create(Task $task) {
             
-            $query = "INSERT INTO tarefas (titulo, data_inicio, data_termino, descricao, user_id) VALUES (:titulo, :data_inicio, :data_termino, :descricao, :user_id)";
+            $query = "INSERT INTO tarefas (titulo, data_inicio, data_termino, descricao, user_id, status_id) VALUES (:titulo, :data_inicio, :data_termino, :descricao, :user_id, :status_id)";
             
             $stmt = $this->conn->prepare($query);
             
@@ -38,7 +40,8 @@
             $stmt->bindParam(":data_inicio", $task->getDataInicio());
             $stmt->bindParam(":data_termino", $task->getDataTermino());
             $stmt->bindParam(":descricao", $task->getDescricao());
-            $stmt->bindParam(":user_id", $task->getId());
+            $stmt->bindParam(":user_id", $task->getUserId());
+            $stmt->bindParam(":status_id", $task->getStatusId());
             
             $stmt->execute();
             
@@ -48,7 +51,7 @@
         
         public function update (Task $task) {
             
-            $query = "UPDATE tarefas SET titulo = :titulo, data_inicio = :data_inicio, data_termino = :data_termino, descricao = :descricao WHERE id = :id";
+            $query = "UPDATE tarefas SET titulo = :titulo, data_inicio = :data_inicio, data_termino = :data_termino, descricao = :descricao, status_id = :status_id WHERE id = :id";
             
             $stmt = $this->conn->prepare($query);
             
@@ -56,11 +59,24 @@
             $stmt->bindParam(":data_inicio", $task->getDataInicio());
             $stmt->bindParam(":data_termino", $task->getDataTermino());
             $stmt->bindParam(":descricao", $task->getDescricao());
+            $stmt->bindParam(":status_id", $task->getStatusId());
             $stmt->bindParam(":id", $task->getId());
             
             $stmt->execute();
             
             $this->message->setMessage("Tarefa atualizada com sucesso", "success", "/index.php");
+            
+        }
+        
+        public function getTasksByStatusId($id) {
+            
+            $query = "SELECT * FROM tarefas WHERE status_id = :status_id";
+            
+            $stmt = $this->conn->prepare($query);
+            
+            $stmt->bindParam(":status_id", $id);
+            
+            $stmt->execute();            
             
         }
         
@@ -142,11 +158,14 @@
             foreach ($data as $item) {
                 
                 $task = new task();
+                
                 $task->setId($item['id']);
                 $task->setTitulo($item['titulo']);
                 $task->setDataInicio($item['data_inicio']);
                 $task->setDataTermino($item['data_termino']);
                 $task->setDescricao($item['descricao']);
+                $task->setUserId($item['user_id']);
+                $task->setStatusId($item['status_id']);
                 
                 $tasks[] = $task;
                 

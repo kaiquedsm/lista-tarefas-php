@@ -54,34 +54,28 @@
                 <?php if(!empty($userData) && !empty($userTasks)): ?>
                     <div class="to-do">
                         <h3>A fazer</h3>
+                        <?php foreach($userTasks as $task): ?>
+                            <?php if($task->getStatusId() === 1): ?>
+                                <?php require("templates/task.php"); ?>    
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     </div>
                     <div class="doing">
                         <h3>Em andamento</h3>
+                        <?php foreach($userTasks as $task): ?>
+                            <?php if($task->getStatusId() === 2): ?>
+                                <?php require("templates/task.php"); ?>    
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     </div>
                     <div class="done">
                         <h3>Concluído</h3>
+                        <?php foreach($userTasks as $task): ?>
+                            <?php if($task->getStatusId() === 3): ?>
+                                <?php require("templates/task.php"); ?>    
+                            <?php endif; ?>
+                        <?php endforeach; ?>
                     </div>
-                    <?php foreach($userTasks as $task): ?>
-                        <article>
-                                <?= $task->getTitulo() ?>
-                                <p>Início: <?= $task->getDataInicio() ?></p>
-                                <p>Término: <?= $task->getDataTermino() ?></p>
-                                <div class="task-buttons">
-                                    <div class="button-task">
-                                        <button>
-                                            <a href="task.php?id=<?= $task->getId() ?>">Editar</a>
-                                        </button>
-                                    </div>
-                                    <form action="task-process.php" method="POST">
-                                        <input type="hidden" name="type" value="delete">
-                                        <input type="hidden" name="id" value="<?= $task->getId() ?>">
-                                        <div class="button-task">
-                                            <input type="submit" name="" value="Deletar">
-                                        </div>
-                                    </form>
-                                </div>
-                        </article>                 
-                    <?php endforeach; ?>
                 <?php elseif(!empty($userData) && empty($userTasks)): ?>
                     <h2>Sem tarefas no momento</h2>
                 <?php else: ?>

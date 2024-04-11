@@ -13,10 +13,15 @@
     $type = filter_input(INPUT_POST, "type");
     
     $userData = $userDAO->verifyToken(false);
-    $userId = $userData->getId();
+    
+    if($userData !== null) {
+        $userId = $userData->getId();
+    } else {
+        $message->setMessage("Faça o login para adicionar tarefas", "error", "/index.php");
+    }
+    
     
     if($type === "create") {
-        
         
         $titulo = filter_input(INPUT_POST, "titulo");
         $data_inicio = filter_input(INPUT_POST, "data_inicio");  
@@ -31,15 +36,17 @@
             $task->setDataInicio($data_inicio);
             $task->setDataTermino($data_termino);
             $task->setDescricao($descricao);
-            $task->setId($userData->getId());
+            $task->setUserId($userData->getId());
+            $task->setStatusId(1);
             
             $taskDAO->create($task);
             
         } else {
             
-            $message->setMessage("Insira todos os dados", "success", "/task.php");
+            $message->setMessage("Insira todos os dados", "error", "back");
             
         }
+        
         
     } elseif($type === "edit") {
         
@@ -47,6 +54,7 @@
         $data_inicio = filter_input(INPUT_POST, "data_inicio");  
         $data_termino = filter_input(INPUT_POST, "data_termino");  
         $descricao = filter_input(INPUT_POST, "descricao");
+        $status_id = filter_input(INPUT_POST, "status");
         $id = filter_input(INPUT_POST, "id");
         
         $taskData = $taskDAO->findById($id);
@@ -56,9 +64,8 @@
             $taskData->setTitulo($titulo);
             $taskData->setDataInicio($data_inicio);
             $taskData->setDataTermino($data_termino);
-            $taskData->setDescricao($descricao);
-            
-            
+            $taskData->setDescricao($descricao);            
+            $taskData->setStatusId($status_id);            
             
             $taskDAO->update($taskData);
             

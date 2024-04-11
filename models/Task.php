@@ -7,6 +7,8 @@
         private $data_inicio;
         private $data_termino;
         private $descricao;
+        private $user_id;
+        private $status_id;
         
         
         public function getId() {
@@ -48,15 +50,29 @@
         public function setDescricao($descricao) {
             $this->descricao = $descricao;
         }
+        public function getUserId() {
+            return $this->user_id;
+        }
+        
+        public function setUserId($user_id) {
+            $this->user_id = $user_id;
+        }
+        public function getStatusId() {
+            return $this->status_id;
+        }
+        
+        public function setStatusId($status_id) {
+            $this->status_id = $status_id;
+        }
         
     }
     
     interface TaskDAOInterface {
         
-        
         public function buildTask($data);
         public function create (Task $task);
         public function update (Task $task);
+        public function getTasksByStatusId($id);
         public function findById ($id);
         public function findAll();
         public function delete ($id);
